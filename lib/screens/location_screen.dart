@@ -1,29 +1,67 @@
-// String description = decodedData['weather'][0]['description'];
-// String cityName = decodedData['name'];
-// double temp = decodedData['main']['temp'];
-// print('$description, $cityName , $temp');
-
 import 'package:flutter/material.dart';
+import 'package:clima/utilities/components.dart';
+import 'package:clima/services/weather_services.dart';
+
 
 class LocationScreen extends StatefulWidget {
+  LocationScreen({this.locationWeather});
+  final locationWeather;
+
   @override
   _LocationScreenState createState() => _LocationScreenState();
 }
 
 class _LocationScreenState extends State<LocationScreen> {
+  String weatherIcon;
+  String cityName;
+  int temp;
+  String weatherMessage;
+  WeatherModel weathermodel=WeatherModel();
+  
+  void updateUI(dynamic weatherData) {
+    int condition = weatherData['weather'][0]['id'];
+    cityName = weatherData['name'];
+    double _temp = weatherData['main']['temp'];
+    temp=_temp.toInt();
+    weatherIcon=weathermodel.getWeatherIcon(condition);
+    weatherMessage=weathermodel.getMessage(temp);
+    
+  }
+
+  void initState() {
+    super.initState();
+    updateUI(widget.locationWeather);
+  }
+
   @override
   Widget build(BuildContext context) {
-    return Container(
-      decoration: BoxDecoration(
-        image: DecorationImage(
-          image: AssetImage('images/location_background.jpg'),
-          fit: BoxFit.cover
+    return SafeArea(
+      child: Center(
+        child: Container(
+          decoration: BoxDecoration(
+            image: DecorationImage(
+                image: AssetImage('images/location_background.jpg'),
+                fit: BoxFit.cover),
+          ),
+          child: Scaffold(
+            backgroundColor: Colors.transparent,
+            body: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: <Widget>[
+                
+                Row(
+                  children: <Widget>[
+                    FloatingCard(label: temp.toString(), labelx: 'degees'),
+                    FloatingCard(label: weatherIcon, labelx: 'degrvhees'),
+                  ],
+                ),
+                TextCard(label: weatherMessage),
+                
+              ],
+            ),
+          ),
         ),
       ),
-      child:Scaffold(
-        body:Text('Yes')
-      )
-
     );
   }
 }

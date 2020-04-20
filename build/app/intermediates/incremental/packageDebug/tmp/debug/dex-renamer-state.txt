@@ -1,0 +1,4 @@
+#Fri Apr 17 18:38:43 WAT 2020
+base.0=C\:\\Users\\HP\\Desktop\\Workspace\\Learning Space\\Dart\\Clima-Flutter-Completed\\build\\app\\intermediates\\dex\\debug\\mergeDexDebug\\out\\classes.dex
+path.0=classes.dex
+renamed.0=classes.dex
