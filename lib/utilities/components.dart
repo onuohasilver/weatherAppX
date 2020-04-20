@@ -2,9 +2,10 @@ import 'package:flutter/material.dart';
 import 'constants.dart';
 
 class FloatingCard extends StatelessWidget {
-  FloatingCard({this.label, this.labelx});
+  FloatingCard({this.label, this.labelx,this.color});
   final String label;
   final String labelx;
+  final Color  color;
 
   @override
   Widget build(BuildContext context) {
@@ -23,7 +24,7 @@ class FloatingCard extends StatelessWidget {
         ),
         decoration: BoxDecoration(
           // boxShadow: [BoxShadow(spreadRadius: 3.0)],
-          color: Colors.grey,
+          color: color,
           borderRadius: BorderRadius.circular(10),
         ),
       ),

@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:clima/utilities/components.dart';
 import 'package:clima/services/weather_services.dart';
 
-
 class LocationScreen extends StatefulWidget {
   LocationScreen({this.locationWeather});
   final locationWeather;
@@ -16,16 +15,15 @@ class _LocationScreenState extends State<LocationScreen> {
   String cityName;
   int temp;
   String weatherMessage;
-  WeatherModel weathermodel=WeatherModel();
-  
+  WeatherModel weathermodel = WeatherModel();
+
   void updateUI(dynamic weatherData) {
     int condition = weatherData['weather'][0]['id'];
     cityName = weatherData['name'];
     double _temp = weatherData['main']['temp'];
-    temp=_temp.toInt();
-    weatherIcon=weathermodel.getWeatherIcon(condition);
-    weatherMessage=weathermodel.getMessage(temp);
-    
+    temp = _temp.toInt();
+    weatherIcon = weathermodel.getWeatherIcon(condition);
+    weatherMessage = weathermodel.getMessage(temp);
   }
 
   void initState() {
@@ -48,15 +46,18 @@ class _LocationScreenState extends State<LocationScreen> {
             body: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
-                
+                Text(
+                  weatherMessage,
+                  style: TextStyle(fontSize: 50, color: Colors.white,fontWeight:FontWeight.bold),
+                ),
                 Row(
                   children: <Widget>[
-                    FloatingCard(label: temp.toString(), labelx: 'degees'),
-                    FloatingCard(label: weatherIcon, labelx: 'degrvhees'),
+                    FloatingCard(label: temp.toString(), labelx: 'degees',color:Colors.lime),
+                    
                   ],
+                  
                 ),
-                TextCard(label: weatherMessage),
-                
+                Text(weatherIcon,style:TextStyle(fontSize:70))
               ],
             ),
           ),
